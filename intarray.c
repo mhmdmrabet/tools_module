@@ -173,6 +173,13 @@ int intarray_get_index_of_min_from(intarray tab, int n)
   int index;
   int min;
 
+  if ((n < 0) || (n >= tab.len))
+  {
+    printf("intarray_get_index_of_min_from : l'index est invalide.\n");
+    printf("Les valeurs valides sont comprise entre 0 et %d.\n", tab.len - 1);
+    return (0);
+  }
+
   i = n + 1;
   index = n;
   min = tab.data[n];
