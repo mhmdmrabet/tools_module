@@ -14,7 +14,9 @@ intarray  intarray_concat(intarray tab1, intarray tab2);
 void      intarray_destroy(intarray tab);
 void      intarray_print_positive_values(intarray tab);
 void      intarray_debug(intarray tab);
+void      intarray_sort1(intarray tab);
 void      intarray_set(intarray tab, int index, int value);
+void      intarray_swap(int *first, int *second);
 int       intarray_length(intarray tab);
 int       intarray_search(intarray tab, int n);
 int       intarray_nb_occurences(intarray tab, int n);
@@ -195,21 +197,45 @@ int intarray_get_index_of_min_from(intarray tab, int n)
   return (index);
 }
 
+void      intarray_swap(int *first, int *second)
+{
+  int tmp;
+  
+  tmp = *first;
+  *first = *second;
+  *second = tmp;
+}
+
+void      intarray_sort1(intarray tab)
+{
+  int i;
+  int index_min;
+
+  i = 0;
+  while (i <= tab.len - 2)
+  {
+    index_min = intarray_get_index_of_min_from(tab, i);
+    intarray_swap(tab.data + i, tab.data + index_min);
+    i++;
+  }
+}
+
 int main(void)
 {
   intarray  toto;
-  intarray  tata;
-  intarray  titi;
-  int min;
+  int i;
+
+  i = 0;
   toto = intarray_create(10);
-  tata = intarray_create(4);
-  intarray_set(toto, 6, 22);
-  titi = intarray_concat(toto, tata);
-  intarray_set(titi, 11, -22);
-  min = intarray_get_min(titi);
-  printf("%d\n", min);
+  while (i < toto.len)
+  {
+    toto.data[i] = i * 2 + 8;
+    i++;
+  }
+  intarray_set(toto, 3, -12);
+  intarray_set(toto, 8, 1);
+  intarray_sort1(toto);
+  intarray_debug(toto);
   intarray_destroy(toto);
-  intarray_destroy(tata);
-  intarray_destroy(titi);
   return (0);
 }
