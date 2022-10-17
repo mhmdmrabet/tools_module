@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "intarray.h"
 
-intarray  intarray_create(int len)
+intarray    intarray_create(int len)
 {
   intarray  tab;
   int i;
@@ -18,7 +18,7 @@ intarray  intarray_create(int len)
   return (tab);
 }
 
-intarray  intarray_concat(intarray tab1, intarray tab2)
+intarray    intarray_concat(intarray tab1, intarray tab2)
 {
   intarray tab;
   int len;
@@ -45,7 +45,62 @@ intarray  intarray_concat(intarray tab1, intarray tab2)
   return (tab);
 }
 
-void      intarray_swap(int *first, int *second)
+intarray    intarray_clone(intarray tab)
+{
+  intarray  copy;
+  int       i;
+
+  i = 0;
+  copy = intarray_create(tab.len);
+  while (i < tab.len)
+  {
+    copy.data[i] = tab.data[i];
+    i++;
+  }
+  return (copy);
+}
+
+float       intarray_average(intarray tab)
+{
+  int sum;
+
+  sum = intarray_sum(tab);
+  if(tab.len <= 0)
+  {
+    printf("intarray_sum : tableau de longueur <= 0.\n");
+    return (-1);
+  }
+  return ((sum + 0.0) / tab.len);
+}
+
+float       intarray_median(intarray tab)
+{
+  intarray  copy;
+  float     result;
+  int       v1;
+  int       v2;
+  if(tab.len <= 0)
+  {
+    printf("intarray_sum : tableau de longueur <= 0.\n");
+    return (-1);
+  }
+  copy = intarray_clone(tab);
+  intarray_sort1(copy);
+  if (copy.len % 2 == 1)
+  {
+    result = (copy.data[(copy.len - 1) / 2]);
+  }
+  else
+  {
+    v1 = copy.data[(copy.len - 1) / 2];
+    v2 = copy.data[(copy.len) / 2];
+    result = ((v1 + v2) / 2.0);
+  }
+  intarray_destroy(copy);
+  return (result);
+}
+
+void        intarray_swap(int *first, int *second)
 {
   int tmp;
   
@@ -54,7 +109,7 @@ void      intarray_swap(int *first, int *second)
   *second = tmp;
 }
 
-void      intarray_sort1(intarray tab)
+void        intarray_sort1(intarray tab)
 {
   int i;
   int index_min;
@@ -68,7 +123,7 @@ void      intarray_sort1(intarray tab)
   }
 }
 
-void      intarray_set(intarray tab, int index, int value)
+void        intarray_set(intarray tab, int index, int value)
 {
   if ((index < 0) || (index >= tab.len))
   {
@@ -79,7 +134,7 @@ void      intarray_set(intarray tab, int index, int value)
   tab.data[index] = value;
 }
 
-void      intarray_print_positive_values(intarray tab)
+void        intarray_print_positive_values(intarray tab)
 {
   int i;
 
@@ -92,7 +147,7 @@ void      intarray_print_positive_values(intarray tab)
   }
 }
 
-void      intarray_debug(intarray tab)
+void        intarray_debug(intarray tab)
 {
   int i;
 
@@ -105,19 +160,20 @@ void      intarray_debug(intarray tab)
   }
   printf("%d", tab.data[tab.len - 1]);
   printf(" ]");
+  printf("\n");
 }
 
-void      intarray_destroy(intarray tab)
+void        intarray_destroy(intarray tab)
 {
   free(tab.data);
 }
 
-int       intarray_length(intarray tab)
+int         intarray_length(intarray tab)
 {
   return tab.len;
 }
 
-int       intarray_get(intarray tab, int index)
+int         intarray_get(intarray tab, int index)
 {
   if ((index < 0) || (index >= tab.len))
   {
@@ -128,7 +184,7 @@ int       intarray_get(intarray tab, int index)
   return tab.data[index];
 }
 
-int       intarray_search(intarray tab, int n)
+int         intarray_search(intarray tab, int n)
 {
   int i;
 
@@ -142,7 +198,7 @@ int       intarray_search(intarray tab, int n)
   return (0);
 }
 
-int       intarray_nb_occurences(intarray tab, int n)
+int         intarray_nb_occurences(intarray tab, int n)
 {
   int i;
   int nb;
@@ -158,18 +214,18 @@ int       intarray_nb_occurences(intarray tab, int n)
   return (nb);
 }
 
-int       intarray_get_min(intarray tab)
+int         intarray_get_min(intarray tab)
 {
   int index_min = intarray_get_index_of_min(tab);
   return (tab.data[index_min]);
 }
 
-int       intarray_get_index_of_min(intarray tab)
+int         intarray_get_index_of_min(intarray tab)
 {
   return (intarray_get_index_of_min_from(tab, 0));
 }
 
-int       intarray_get_index_of_min_from(intarray tab, int n)
+int         intarray_get_index_of_min_from(intarray tab, int n)
 {
   int i;
   int index;
@@ -195,4 +251,21 @@ int       intarray_get_index_of_min_from(intarray tab, int n)
     i++;
   }
   return (index);
+}
+
+int         intarray_sum(intarray tab)
+{
+  int sum;
+  int i;
+
+  i = 0;
+  sum = 0;
+  if(tab.len <= 0)
+    printf("intarray_sum : tableau de longueur <= 0.\n");
+  while (i < tab.len)
+  {
+    sum += tab.data[i];
+    i++;
+  }
+  return (sum);
 }
