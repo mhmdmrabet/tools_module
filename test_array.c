@@ -2,23 +2,15 @@
 #include <stdlib.h>
 #include "intarray.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
-  intarray  toto;
   int i;
 
   i = 0;
-  toto = intarray_create(6);
-  while (i < toto.len)
+  while (i < argc)
   {
-    toto.data[i] = i * 2 + 8;
+    printf("%s\n", argv[i]);
     i++;
   }
-  intarray_set(toto, 3, -12);
-  intarray_debug(toto);
-  printf("Moyenne : %f.\n", intarray_average(toto));
-  printf("Mediane : %f.\n", intarray_median(toto));
-  intarray_debug(toto);
-  intarray_destroy(toto);
   return (0);
 }
