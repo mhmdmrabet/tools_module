@@ -29,6 +29,12 @@ int main(int argc, char **argv)
     }
     i++;
   }
+  if (tab.len == 0)
+  {
+    printf("Aucun nombre. Stat impossible !\n");
+    intarray_destroy(tab);
+    return (0);
+  }
   tab.len = real_len_of_tab;
   max = intarray_get_max(tab);
   min = intarray_get_min(tab);

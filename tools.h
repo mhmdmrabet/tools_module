@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+void intarray_swap(int *first, int *second);
 int string_to_int(char *str);
 int safe_string_to_int(char *str, int *ok);

@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include "tools.h"
 
+void intarray_swap(int *first, int *second)
+{
+  int tmp;
+
+  tmp = *first;
+  *first = *second;
+  *second = tmp;
+}
+
 int string_to_int(char *str)
 {
   int ok;

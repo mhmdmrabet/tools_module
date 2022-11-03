@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "intarray.h"
+#include "tools.h"
 
 intarray intarray_create(int len)
 {
@@ -98,15 +100,6 @@ float intarray_median(intarray tab)
   }
   intarray_destroy(copy);
   return (result);
-}
-
-void intarray_swap(int *first, int *second)
-{
-  int tmp;
-
-  tmp = *first;
-  *first = *second;
-  *second = tmp;
 }
 
 void intarray_sort1(intarray tab)
