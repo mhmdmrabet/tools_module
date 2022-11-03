@@ -18,6 +18,9 @@ int safe_string_to_int(char *str, int *ok)
   int result;
   int i;
 
+  if (str[0] == '-')
+    return -safe_string_to_int(str + 1, ok);
+
   result = 0;
   i = 0;
   *ok = 1;
@@ -38,18 +41,4 @@ int safe_string_to_int(char *str, int *ok)
     i++;
   }
   return (result);
-}
-
-int main(int argc, char **argv)
-{
-  int number;
-
-  number = 0;
-  if (argc > 1)
-  {
-    number = string_to_int(argv[1]);
-  }
-  printf("%d", number);
-  printf("\n");
-  return (0);
 }
