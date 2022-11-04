@@ -1,12 +1,15 @@
-typedef struct intarray intarray;
+typedef struct _intarray *intarray;
+typedef struct _intarray S_intarray;
 
-struct intarray
+struct _intarray
 {
   int *data;
+  int alloc;
   int len;
 };
 
 intarray intarray_create(int len);
+intarray empty_intarray_create(int alloc);
 intarray intarray_clone(intarray tab);
 intarray intarray_concat(intarray tab1, intarray tab2);
 float intarray_average(intarray tab);
@@ -16,6 +19,9 @@ void intarray_print_positive_values(intarray tab);
 void intarray_debug(intarray tab);
 void intarray_sort1(intarray tab);
 void intarray_set(intarray tab, int index, int value);
+void unsorted_intarray_delete(intarray tab, int index);
+void intarray_delete(intarray tab, int index);
+void intarray_add(intarray tab, int value);
 int intarray_sum(intarray tab);
 int intarray_length(intarray tab);
 int intarray_search(intarray tab, int n);

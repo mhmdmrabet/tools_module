@@ -6,14 +6,14 @@
 
 int main(int argc, char **argv)
 {
-  intarray tab = intarray_create(argc - 1);
-  int real_len_of_tab = 0;
+  intarray tab;
   int i;
   int n;
   int ok;
   int min;
   int max;
 
+  tab = empty_intarray_create(argc - 1);
   min = 0;
   max = 0;
   i = 1;
@@ -24,18 +24,16 @@ int main(int argc, char **argv)
     n = safe_string_to_int(argv[i], &ok);
     if (ok)
     {
-      intarray_set(tab, real_len_of_tab, n);
-      real_len_of_tab++;
+      intarray_add(tab, n);
     }
     i++;
   }
-  if (tab.len == 0)
+  if (tab->len == 0)
   {
     printf("Aucun nombre. Stat impossible !\n");
     intarray_destroy(tab);
     return (0);
   }
-  tab.len = real_len_of_tab;
   max = intarray_get_max(tab);
   min = intarray_get_min(tab);
   intarray_debug(tab);

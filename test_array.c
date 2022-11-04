@@ -3,15 +3,22 @@
 #include "intarray.h"
 #include "tools.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-  int i;
+  intarray tab;
+  intarray tab2;
 
-  i = 0;
-  while (i < argc)
-  {
-    printf("%d\n", string_to_int(argv[i]));
-    i++;
-  }
+  tab = intarray_create(10);
+  tab2 = empty_intarray_create(0);
+  intarray_set(tab, 4, 10);
+  intarray_set(tab, 9, 25);
+  intarray_delete(tab, 0);
+  intarray_delete(tab, 1);
+  intarray_add(tab, 22);
+  intarray_add(tab, 24);
+  intarray_debug(tab);
+  intarray_debug(tab2);
+  intarray_destroy(tab);
+  intarray_destroy(tab2);
   return (0);
 }
