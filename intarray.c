@@ -124,6 +124,56 @@ float intarray_median(intarray tab)
   return (result);
 }
 
+void intarray_resize(intarray tab, int size)
+{
+  int *new_tab;
+  int i;
+
+  i = 0;
+  new_tab = malloc(sizeof(int) * size);
+  while (i < tab->len)
+  {
+    new_tab[i] = tab->data[i];
+    i++;
+  }
+  free(tab->data);
+  tab->data = new_tab;
+  tab->alloc = size;
+}
+
+void ext_intarray_set(intarray tab, int index, int value)
+{
+  int i;
+
+  i = tab->len;
+  if (index < 0)
+  {
+    printf("ext_intarray_set : impossible d'écrire en case %d.\n", index);
+    return;
+  }
+  if (index < tab->len)
+  {
+    tab->data[index] = value;
+    ext_intarray_debug(tab);
+    return;
+  }
+  if (index >= tab->alloc)
+  {
+    intarray_resize(tab, 1 + 2 * index);
+  }
+  while (i < index)
+  {
+    tab->data[i] = 0;
+    i++;
+  }
+  tab->data[index] = value;
+  if (index >= tab->len)
+  {
+    tab->len = index + 1;
+  }
+  ext_intarray_debug(tab);
+}
+
 void intarray_sort1(intarray tab)
 {
   int i;
@@ -179,6 +229,12 @@ void intarray_debug(intarray tab)
   printf("\n");
 }
 
+void ext_intarray_debug(intarray tab)
+{
+  printf("Tab. alloc = %d ; len = %d\n", tab->alloc, tab->len);
+  intarray_debug(tab);
+}
+
 void intarray_destroy(intarray tab)
 {
   free(tab->data);
@@ -220,13 +276,7 @@ void unsorted_intarray_delete(intarray tab, int index)
 
 void intarray_add(intarray tab, int value)
 {
-  if (tab->len >= tab->alloc)
-  {
-    printf("intarray_add : La taille alloué n'est pas suffisante.\n");
-    return;
-  }
-  tab->data[tab->len] = value;
-  tab->len++;
+  ext_intarray_set(tab, tab->len, value);
 }
 
 int intarray_length(intarray tab)
