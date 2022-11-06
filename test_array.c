@@ -2,25 +2,20 @@
 #include <stdlib.h>
 #include "intarray.h"
 #include "tools.h"
+#include "mstr.h"
 
 int main(void)
 {
-  intarray tab;
-  intarray tab2;
+  mstr tab;
+  // int i;
 
-  tab = intarray_create(10);
-  tab2 = empty_intarray_create(6);
-  intarray_set(tab, 4, 10);
-  intarray_set(tab, 9, 25);
-  intarray_delete(tab, 0);
-  intarray_delete(tab, 1);
-  intarray_add(tab, 22);
-  intarray_add(tab, 24);
-  ext_intarray_debug(tab);
-  ext_intarray_debug(tab2);
-  ext_intarray_set(tab, 16, -45);
-  ext_intarray_debug(tab);
-  intarray_destroy(tab);
-  intarray_destroy(tab2);
+  tab = regstr_to_mstr("Hello world !");
+  // for (i = 1; i <= 100; i++)
+  // {
+  //   mstr_add(tab, i);
+  // }
+
+  mstr_debug(tab);
+  mstr_destroy(tab);
   return (0);
 }

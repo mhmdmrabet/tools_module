@@ -11,6 +11,15 @@ void intarray_swap(int *first, int *second)
   *second = tmp;
 }
 
+void char_swap(char *first, char *second)
+{
+  char tmp;
+
+  tmp = *first;
+  *first = *second;
+  *second = tmp;
+}
+
 int string_to_int(char *str)
 {
   int ok;

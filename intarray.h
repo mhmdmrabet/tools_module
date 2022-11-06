@@ -8,8 +8,11 @@ struct _intarray
   int len;
 };
 
+#define INTARRAY_DEFAULT_ALLOC 22
+
 intarray intarray_create(int len);
 intarray empty_intarray_create(int alloc);
+intarray standard_empty_intarray_create(void);
 intarray intarray_clone(intarray tab);
 intarray intarray_concat(intarray tab1, intarray tab2);
 float intarray_average(intarray tab);

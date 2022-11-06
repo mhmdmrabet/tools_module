@@ -42,6 +42,11 @@ intarray empty_intarray_create(int alloc)
   return (tab);
 }
 
+intarray standard_empty_intarray_create(void)
+{
+  return empty_intarray_create(INTARRAY_DEFAULT_ALLOC);
+}
+
 intarray intarray_concat(intarray tab1, intarray tab2)
 {
   intarray tab;
@@ -171,7 +176,6 @@ void ext_intarray_set(intarray tab, int index, int value)
   {
     tab->len = index + 1;
   }
-  ext_intarray_debug(tab);
 }
 
 void intarray_sort1(intarray tab)
