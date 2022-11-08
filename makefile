@@ -10,7 +10,7 @@ intarray.exe : test_array.o intarray.o tools.o mstr.o
 intarray.o : intarray.c intarray.h tools.h
 	gcc -Wall -Wextra -Werror -c intarray.c
 
-mstr.o : mstr.c mstr.h tools.h
+mstr.o : mstr.c mstr.h tools.h intarray.h
 	gcc -Wall -Wextra -Werror -c mstr.c
 
 test_array.o : test_array.c intarray.h tools.h mstr.h

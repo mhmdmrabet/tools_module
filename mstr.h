@@ -1,3 +1,9 @@
+#ifndef __MSTR_H__
+#define __MSTR_H__
+
+#include "intarray.h"
+#include "tools.h"
+
 typedef struct _mstr *mstr;
 typedef struct _mstr S_mstr;
 
@@ -15,6 +21,7 @@ mstr empty_mstr_create(int alloc);
 mstr standard_empty_mstr_create(void);
 mstr mstr_clone(mstr tab);
 mstr mstr_concat(mstr tab1, mstr tab2);
+void D_mstr_concat(mstr tab1, mstr tab2);
 mstr regstr_to_mstr(char *str);
 char *mstr_to_regstr(mstr tab);
 void ext_mstr_set(mstr tab, int index, char value);
@@ -37,3 +44,5 @@ int mstr_get_index_of_min(mstr tab);
 int mstr_get_index_of_min_from(mstr tab, int index);
 int mstr_get_index_of_max(mstr tab);
 int mstr_get_index_of_max_from(mstr tab, int index);
+
+#endif

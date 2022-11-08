@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "mstr.h"
+#include "intarray.h"
 #include "tools.h"
 
 void mstr_create_aux(mstr tab)
@@ -72,6 +73,19 @@ mstr mstr_concat(mstr tab1, mstr tab2)
     j++;
   }
   return (tab);
+}
+
+void D_mstr_concat(mstr tab1, mstr tab2)
+{
+	int i;
+
+	i = 0;
+	while (i< tab2->len)
+	{
+    mstr_add(tab1, tab2->data[i]);
+		i++;
+	}
+	
 }
 
 mstr mstr_clone(mstr tab)

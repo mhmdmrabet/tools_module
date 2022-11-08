@@ -1,3 +1,9 @@
+#ifndef __INTARRAY_H__
+#define __INTARRAY_H__
+
+#include "tools.h"
+#include "intarray.h"
+
 typedef struct _intarray *intarray;
 typedef struct _intarray S_intarray;
 
@@ -39,3 +45,5 @@ int intarray_get_index_of_min(intarray tab);
 int intarray_get_index_of_min_from(intarray tab, int n);
 int intarray_get_index_of_max(intarray tab);
 int intarray_get_index_of_max_from(intarray tab, int n);
+
+#endif

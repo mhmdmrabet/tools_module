@@ -4,16 +4,19 @@
 #include "tools.h"
 #include "mstr.h"
 
-int main(void)
+int main(int argc, char **argv)
 {
-  mstr tab;
-  // int i;
+  mstr	tab;
+  mstr	tmp;
+  int	i;
 
-  tab = regstr_to_mstr("Hello world !");
-  // for (i = 1; i <= 100; i++)
-  // {
-  //   mstr_add(tab, i);
-  // }
+  tab = standard_empty_mstr_create();
+  for (i = 1; i < argc; i++)
+  {
+	tmp = regstr_to_mstr(argv[i]);
+	D_mstr_concat(tab, tmp);
+	mstr_destroy(tmp);
+  }
 
   mstr_debug(tab);
   mstr_destroy(tab);
