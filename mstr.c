@@ -5,6 +5,44 @@
 #include "intarray.h"
 #include "tools.h"
 
+intarray	mstr_find_substr_indices(mstr s, mstr sub)
+{
+	intarray	A;
+	int	i;
+
+	i = 0;
+	A = standard_empty_intarray_create();
+	while (i <= s->len - sub->len)
+	{
+		if (mstr_equal_substr(s, i , i + sub->len - 1, sub, 0))
+			intarray_add(A, i);
+		i++;
+	}
+	
+	return (A);
+}
+
+intarray	mstr_find_proper_substr_indices(mstr s, mstr sub)
+{
+	intarray	A;
+	int	i;
+
+	i = 0;
+	A = standard_empty_intarray_create();
+	while (i <= s->len - sub->len)
+	{
+		if (mstr_equal_substr(s, i , i + sub->len - 1, sub, 0))
+		{
+			intarray_add(A, i);
+			i += sub->len;
+		}
+		else
+			i++;
+	}
+	
+	return (A);
+}
+
 void mstr_create_aux(mstr tab)
 {
   int i;
@@ -362,6 +400,35 @@ int mstr_get_index_of_max_from(mstr tab, int n)
   }
   return (index);
 }
+
+int mstr_equal_substr(mstr str1, int s1, int e1, mstr str2, int s2)
+{
+	int	len;
+	int	e2;
+	int	i;
+
+	i = 0;
+	len = e1 - s1 + 1;
+	e2 = s2 + len - 1;
+	if (e2 >= str2->len)
+		return (0);
+	while (i < len)
+	{
+		if(str1->data[i + s1] != str2->data[i + s2])
+			return (0);
+		i++;
+	}
+		return (1);
+}
+
+int	mstr_equal(mstr str1, mstr str2)
+{
+	if (str1->len != str2->len)
+		return (0);
+	return (mstr_equal_substr(str1, 0, str1->len - 1, str2, 0));
+}
+
+
 
 mstr regstr_to_mstr(char *str)
 {

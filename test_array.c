@@ -4,21 +4,17 @@
 #include "tools.h"
 #include "mstr.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
-  mstr	tab;
-  mstr	tmp;
-  int	i;
-
-  tab = standard_empty_mstr_create();
-  for (i = 1; i < argc; i++)
-  {
-	tmp = regstr_to_mstr(argv[i]);
-	D_mstr_concat(tab, tmp);
-	mstr_destroy(tmp);
-  }
-
-  mstr_debug(tab);
-  mstr_destroy(tab);
-  return (0);
+	mstr	str1;
+	mstr	str2;
+	
+	str1 = regstr_to_mstr("tototo tititototi");
+	str2 = regstr_to_mstr("toto");
+	intarray	A = mstr_find_proper_substr_indices(str1, str2);
+	intarray_debug(A);
+	intarray_destroy(A);
+	mstr_destroy(str1);
+	mstr_destroy(str2);
+  	return (0);
 }
